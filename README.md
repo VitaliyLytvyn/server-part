@@ -269,7 +269,7 @@ Submit your assignment for peer review per the instructions in the assignment de
   should accept and their mapping to HTTP parameters.
 - There are multiple ways to implement most pieces of the application. Any solution that passes
   the tests will be given full credit.
-- None of your Controllers or other classes should "implement VideoSvcApi" -- which is an interface
+- None of your Controllers or other classes should implement "VideoSvcApi" -- which is an interface
   that is only used to create a Retrofit client. None of your classes should look like this:
 ```java
         public class SomeClass implements VideoSvcApi // Don't implement this interface! 
