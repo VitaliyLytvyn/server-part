@@ -62,7 +62,7 @@ public class MyController {
     @RequestMapping (value = VideoSvcApi.VIDEO_DATA_PATH, method = RequestMethod.POST)
     public @ResponseBody
     VideoStatus setVideoData(
-            @PathVariable(VideoSvcApi.ID_PARAMETER) long id,
+            @PathVariable(VideoSvcApi.ID_PARAMETER) String id,
             @RequestParam(VideoSvcApi.DATA_PARAMETER)MultipartFile videoData,
             HttpServletResponse response,
             Principal p
@@ -89,7 +89,7 @@ public class MyController {
     @RequestMapping (value = VideoSvcApi.VIDEO_DATA_PATH, method = RequestMethod.GET)
     public
     void getData(
-            @PathVariable(VideoSvcApi.ID_PARAMETER) long id,
+            @PathVariable(VideoSvcApi.ID_PARAMETER) String id,
             HttpServletResponse response) throws IOException {
 
         System.out.println("IN " + "getData()");
@@ -110,7 +110,7 @@ public class MyController {
     @RequestMapping (value = VideoSvcApi.VIDEO_SVC_PATH + "/{id}", method = RequestMethod.GET)
     public @ResponseBody
     Video getVideoById(
-            @PathVariable(VideoSvcApi.ID_PARAMETER) long id,
+            @PathVariable(VideoSvcApi.ID_PARAMETER) String id,
             HttpServletResponse response) throws IOException {
 
         System.out.println("IN " + "getVideoById()");
@@ -126,7 +126,7 @@ public class MyController {
     @RequestMapping (value = VideoSvcApi.VIDEO_SVC_PATH+"/{id}/rating/{rating}", method = RequestMethod.POST)
     public @ResponseBody
     AverageVideoRating rateVideo(
-            @PathVariable("id") long id,
+            @PathVariable("id") String id,
             @PathVariable("rating") int setRate,
             HttpServletResponse response,
             Principal p) throws IOException {
@@ -135,15 +135,15 @@ public class MyController {
         System.out.println("RATING  ENTERED ID "+id +" rate: "+ setRate);
 
 
-        if(! videos.exists(new Long(id))){
+        if(! videos.exists(id)){
             response.sendError(404);
             return null;
         }
 
-        Video vd = videos.findOne(new Long(id));
+        Video vd = videos.findOne(id);
 
         Collection<UserVideoRating> cl = null;
-        cl = ratingRepository.findByVideoIdAndUser((new Long(id)), p.getName());
+        cl = ratingRepository.findByVideoIdAndUser(id, p.getName());
 
         if(cl != null && !cl.isEmpty()){
             for(UserVideoRating usrRt : cl){
@@ -174,25 +174,25 @@ public class MyController {
     @RequestMapping (value = VideoSvcApi.VIDEO_SVC_PATH+"/{id}/rating", method = RequestMethod.GET)
     public @ResponseBody
     AverageVideoRating getVideoRating(
-            @PathVariable("id") long id,
+            @PathVariable("id") String id,
             HttpServletResponse response ) throws IOException{
 
         System.out.println("IN " + "getVideoRating()");
-        if(! videos.exists(new Long(id))){
+        if(! videos.exists(id)){
             response.sendError(404);
             return null;
         }
 
-        Video vd = videos.findOne(new Long(id));
+        Video vd = videos.findOne(id);
         System.out.println("GET RATING  RETURN Rating: "+vd.getStarRating()+" Likes: "+vd.getLikes());
         return new AverageVideoRating(vd.getStarRating(), id, (int)vd.getLikes());
 
     }
 
 
-    private  void updatedRate(long id, double setRate){
+    private  void updatedRate(String id, double setRate){
 
-        Video vd = videos.findOne(new Long(id));
+        Video vd = videos.findOne(id);
         long mCount =  vd.getLikes() + 1;
         vd.setLikes(mCount);
         double sumOfGrades = vd.getSumOfAllGrades() + setRate;

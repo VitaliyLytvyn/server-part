@@ -15,7 +15,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+//import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -23,10 +25,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 //our classes with @Autowired
 @EnableAutoConfiguration
 
-// Tell Spring to automatically create a JPA implementation of our
-// Repositories !!!!!!!!!!!!!!!!
-@EnableJpaRepositories(basePackageClasses = { VideoRepository.class, UserRatingRepository.class})
+///// Tell Spring to automatically create a JPA implementation of our
+//// Repositories !!!!!!!!!!!!!!!!
+//@EnableJpaRepositories(basePackageClasses = { VideoRepository.class, UserRatingRepository.class})
 
+// Tell Spring to automatically create a MongoDB implementation of our
+// VideoRepository
+@EnableMongoRepositories//(basePackageClasses = { VideoRepository.class, UserRatingRepository.class})
 // Tell Spring to turn on WebMVC (e.g., it should enable the DispatcherServlet
 // so that requests can be routed to our Controllers)
 @EnableWebMvc

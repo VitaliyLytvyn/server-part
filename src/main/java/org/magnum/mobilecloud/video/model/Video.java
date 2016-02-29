@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Objects;
+import org.springframework.data.annotation.Id;
 
 /**
  * A simple object to represent a video and its URL for viewing.
@@ -17,12 +18,12 @@ import com.google.common.base.Objects;
  * 
  * @author jules, mitchell
  */
-@Entity
+/////@Entity
 public class Video {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	//////@GeneratedValue(strategy = GenerationType.AUTO)
+	private String id;
 
 	private String title;
 	private long duration;
@@ -68,9 +69,9 @@ public class Video {
 
 	public void setDuration(long duration) {this.duration = duration;}
 
-	public long getId() {return id;}
+	public String getId() {return id;}
 
-	public void setId(long id) {this.id = id;}
+	public void setId(String id) {this.id = id;}
 
 	public String getOwner() {return owner;}
 
@@ -104,9 +105,7 @@ public class Video {
 		this.contentType = contentType;
 	}
 
-	//public Set<UserVideoRating> getLikedBy() {return likedBy;}
 
-	//public void setLikedBy(Set<UserVideoRating> likedBy) {this.likedBy = likedBy;}
 
 	public long getLikes() {return likes;}
 

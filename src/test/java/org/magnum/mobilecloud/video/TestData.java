@@ -31,7 +31,7 @@ public class TestData {
 		// Information about the video
 		// Construct a random identifier using Java's UUID class
 		String id = UUID.randomUUID().toString();
-		String title = "Video-"+id;
+		String title = "WORKS!!! Video-"+id;
 		String url = "http://coursera.org/some/video-"+id;
 		long duration = 60 * (int)Math.rint(Math.random() * 60) * 1000; // random time up to 1hr
 		return new Video(null, title, url, duration, 0, null);

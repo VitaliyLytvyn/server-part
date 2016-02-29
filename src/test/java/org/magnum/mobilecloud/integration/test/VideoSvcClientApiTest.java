@@ -167,7 +167,7 @@ public class VideoSvcClientApiTest {
 		Video received = videoSvc.addVideo(video);
 		assertEquals(video.getTitle(), received.getTitle());
 		assertEquals(video.getDuration(), received.getDuration());
-		assertTrue(received.getId() > 0);
+		assertTrue(received.getId() != null);
 	}
 
 	@Test
@@ -233,7 +233,7 @@ public class VideoSvcClientApiTest {
 	@Test
 	public void testGetNonExistantVideosData() throws Exception {
 
-		long nonExistantId = getInvalidVideoId();
+		String nonExistantId = getInvalidVideoId();
 
 		try {
 			Response r = videoSvc.getVideoData(nonExistantId);
@@ -245,7 +245,7 @@ public class VideoSvcClientApiTest {
 
 	@Test
 	public void testAddNonExistantVideosData() throws Exception {
-		long nonExistantId = getInvalidVideoId();
+		String nonExistantId = getInvalidVideoId();
 		try {
 			videoSvc.setVideoData(nonExistantId, new TypedFile("video/mpeg",
 					testVideoData));
@@ -256,8 +256,8 @@ public class VideoSvcClientApiTest {
 		}
 	}
 
-	private long getInvalidVideoId() {
-		Set<Long> ids = new HashSet<Long>();
+	private String getInvalidVideoId() {
+		Set<String> ids = new HashSet<String>();
 		Collection<Video> stored = videoSvc.getVideoList();
 		for (Video v : stored) {
 			ids.add(v.getId());
@@ -267,7 +267,7 @@ public class VideoSvcClientApiTest {
 		while (ids.contains(nonExistantId)) {
 			nonExistantId++;
 		}
-		return nonExistantId;
+		return Long.toString(nonExistantId);
 	}
 
 }

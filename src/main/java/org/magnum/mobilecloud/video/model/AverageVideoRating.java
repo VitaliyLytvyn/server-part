@@ -4,11 +4,11 @@ public class AverageVideoRating {
 
 	private final double rating;
 
-	private final long videoId;
+	private final String videoId;
 
 	private final int totalRatings;
 
-	public AverageVideoRating(double rating, long videoId, int totalRatings) {
+	public AverageVideoRating(double rating, String videoId, int totalRatings) {
 		super();
 		this.rating = rating;
 		this.videoId = videoId;
@@ -19,7 +19,7 @@ public class AverageVideoRating {
 		return rating;
 	}
 
-	public long getVideoId() {
+	public String getVideoId() {
 		return videoId;
 	}
 
